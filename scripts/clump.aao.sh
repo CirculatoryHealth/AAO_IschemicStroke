@@ -36,16 +36,16 @@ plink_v1.9_6.21 --bfile /hpc/dhl_ec/data/references/1000G/Phase1/PLINK/1000Gp1v3
 ## Men-only analyses
 
 plink_v1.9_6.21 --bfile /hpc/dhl_ec/data/references/1000G/Phase1/PLINK/1000Gp1v3.20101123.EUR \
---clump /hpc/dhl_ec/data/_gwas_datasets/_SiGN/sumstats_AAO/21.04.13.alleur.groupcov.stats \
+--clump /hpc/dhl_ec/data/_gwas_datasets/_SiGN/sumstats_AAO/21.04.13.xy.eur.groupcov.stats \
 --clump-field P_BOLT_LMM_INF \
 --clump-p1 5e-5 --clump-p2 0.05 --clump-kb 1000 --clump-r2 0.05 --clump-best --clump-verbose \
---out AAO/OUTPUT/21.04.12.alleur.groupcov.stats
+--out AAO/OUTPUT/21.04.13.xy.eur.groupcov.stats
 
 plink_v1.9_6.21 --bfile /hpc/dhl_ec/data/references/1000G/Phase1/PLINK/1000Gp1v3.20101123.EUR \
 --clump /hpc/dhl_ec/data/_gwas_datasets/_SiGN/sumstats_AAO/21.04.13.xy.eur.groupcov.stats \
 --clump-field P_BOLT_LMM_INF \
 --clump-p1 5e-8 --clump-p2 0.05 --clump-kb 1000 --clump-r2 0.05 --clump-best --clump-verbose \
---out AAO/OUTPUT/21.04.12.xy.eur.groupcov.stats.gwaslevel
+--out AAO/OUTPUT/21.04.13.xy.eur.groupcov.stats.gwaslevel
 
 
 ## Women-only analyses
@@ -54,11 +54,11 @@ plink_v1.9_6.21 --bfile /hpc/dhl_ec/data/references/1000G/Phase1/PLINK/1000Gp1v3
 --clump /hpc/dhl_ec/data/_gwas_datasets/_SiGN/sumstats_AAO/21.04.13.xx.eur.groupcov.stats \
 --clump-field P_BOLT_LMM_INF \
 --clump-p1 5e-5 --clump-p2 0.05 --clump-kb 1000 --clump-r2 0.05 --clump-best --clump-verbose \
---out AAO/OUTPUT/21.04.12.xx.eur.groupcov.stats
+--out AAO/OUTPUT/21.04.13.xx.eur.groupcov.stats
 
 plink_v1.9_6.21 --bfile /hpc/dhl_ec/data/references/1000G/Phase1/PLINK/1000Gp1v3.20101123.EUR \
---clump /hpc/dhl_ec/data/_gwas_datasets/_SiGN/sumstats_AAO/21.04.13.alleur.groupcov.stats \
+--clump /hpc/dhl_ec/data/_gwas_datasets/_SiGN/sumstats_AAO/21.04.13.xx.eur.groupcov.stats \
 --clump-field P_BOLT_LMM_INF \
 --clump-p1 5e-8 --clump-p2 0.05 --clump-kb 1000 --clump-r2 0.05 --clump-best --clump-verbose \
---out AAO/OUTPUT/21.04.12.alleur.groupcov.stats.gwaslevel
+--out AAO/OUTPUT/21.04.13.xx.eur.groupcov.stats.gwaslevel
 
