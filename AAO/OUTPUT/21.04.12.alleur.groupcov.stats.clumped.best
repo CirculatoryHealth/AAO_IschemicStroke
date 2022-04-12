@@ -2,7 +2,7 @@
     rs174623     rs174626  0.984     1.76  8.2e-07    GG/AA        1 
     rs306186   rs35685986  0.514    0.011  2.4e-05    TG/CC        1 
     rs174626     rs174623  0.984    -1.76    7e-07    GG/AA        1 
-    rs174606           NA     NA       NA       NA       NA       NA 
+    rs174606     rs198470 0.0522    -98.7   0.0011    TC/GA        1 
     rs174609           NA     NA       NA       NA       NA       NA 
     rs174610           NA     NA       NA       NA       NA       NA 
     rs174613           NA     NA       NA       NA       NA       NA 
@@ -22,25 +22,25 @@
   rs35549026   rs67306361  0.994    -0.07  1.7e-06    AA/CC        1 
     rs162094     rs327261   0.98    -1.79    2e-05    CT/TC        1 
   rs10184310   rs13416493  0.698    -6.72  1.3e-05    GA/AC        1 
-  rs78102821           NA     NA       NA       NA       NA       NA 
+  rs78102821   rs62530512  0.175    -14.1   0.0079    TA/AT        1 
    rs2236563   rs12435737  0.986    -1.16  2.7e-06    AA/GG        1 
   rs12890125           NA     NA       NA       NA       NA       NA 
   rs12436191           NA     NA       NA       NA       NA       NA 
    rs4420638     rs429358  0.659      -11  1.6e-06    GC/AT        1 
    rs1813898   rs11632061      1    -11.3    1e-05    GA/AC        1 
    rs7169621    rs1813898  0.973    -24.2  6.6e-06    AG/GA        1 
- rs142573670           NA     NA       NA       NA       NA       NA 
+ rs142573670   rs10444767 0.0604   -0.107    0.036    AG/GA        1 
       rs6582           NA     NA       NA       NA       NA       NA 
-  rs12902568           NA     NA       NA       NA       NA       NA 
+  rs12902568   rs75908142 0.0571      605     0.02    AT/GG        1 
    rs8019608   rs11157925      1     13.5  9.7e-06    GA/AG        1 
    rs3751653           NA     NA       NA       NA       NA       NA 
    rs8029384           NA     NA       NA       NA       NA       NA 
   rs13409385   rs10184310   0.67     8.66    4e-06    TG/CA        1 
   rs35047458           NA     NA       NA       NA       NA       NA 
-  rs12215198    rs6568774 0.0992    0.548  0.00048    AT/GG        1 
+  rs12215198    rs1418222  0.282     -150    0.013    AC/GT        1 
    rs7182530           NA     NA       NA       NA       NA       NA 
   rs12883381    rs8019608  0.994    -6.76  7.8e-06    CG/GA        1 
-  rs12904801           NA     NA       NA       NA       NA       NA 
+  rs12904801   rs16971576 0.0553      500    0.028    GT/AA        1 
   rs12721051           NA     NA       NA       NA       NA       NA 
    rs2924387           NA     NA       NA       NA       NA       NA 
    rs1037445           NA     NA       NA       NA       NA       NA 
@@ -51,7 +51,7 @@
   rs34845954           NA     NA       NA       NA       NA       NA 
   rs11157925           NA     NA       NA       NA       NA       NA 
   rs13409492           NA     NA       NA       NA       NA       NA 
-    rs174625           NA     NA       NA       NA       NA       NA 
+    rs174625    rs7131412 0.0544     64.4    0.016    AT/TC        1 
   rs11632061           NA     NA       NA       NA       NA       NA 
   rs11632370           NA     NA       NA       NA       NA       NA 
    rs2412532           NA     NA       NA       NA       NA       NA 
@@ -63,7 +63,7 @@
   rs10190084           NA     NA       NA       NA       NA       NA 
    rs4854520    rs4854458      1   -0.065  1.3e-05    GC/CG        1 
    rs1317087    rs4854520      1    -4.27  1.1e-05    AG/CC        1 
-   rs2311420           NA     NA       NA       NA       NA       NA 
+   rs2311420   rs10180188 0.0636     36.2    0.021    AC/TT        1 
   rs10177248           NA     NA       NA       NA       NA       NA 
    rs2712308    rs2600959      1    -2.36    2e-05    GA/AG        1 
  rs182944824           NA     NA       NA       NA       NA       NA 
@@ -77,10 +77,10 @@
   rs62019918           NA     NA       NA       NA       NA       NA 
   rs12913697           NA     NA       NA       NA       NA       NA 
    rs7171885           NA     NA       NA       NA       NA       NA 
-  rs34161837           NA     NA       NA       NA       NA       NA 
+  rs34161837    rs1402569  0.053      436    0.012    AA/GC        1 
   rs56131196           NA     NA       NA       NA       NA       NA 
-  rs17017880           NA     NA       NA       NA       NA       NA 
-  rs11068538           NA     NA       NA       NA       NA       NA 
+  rs17017880   rs11694696 0.0509     -191    0.045    AA/TG        1 
+  rs11068538   rs11613545 0.0537    -87.5   0.0069    TC/CT        1 
   rs55991936   rs55650444  0.955      3.7  2.6e-05    GT/CA        1 
    rs1967368           NA     NA       NA       NA       NA       NA 
    rs4080706           NA     NA       NA       NA       NA       NA 
@@ -109,7 +109,7 @@
     rs174618           NA     NA       NA       NA       NA       NA 
     rs174620           NA     NA       NA       NA       NA       NA 
   rs10400890           NA     NA       NA       NA       NA       NA 
-  rs10400901           NA     NA       NA       NA       NA       NA 
+  rs10400901   rs17715742 0.0517      323    0.046    TC/GT        1 
   rs12591207           NA     NA       NA       NA       NA       NA 
    rs2898996           NA     NA       NA       NA       NA       NA 
   rs16970851           NA     NA       NA       NA       NA       NA 
@@ -120,11 +120,11 @@
   rs13380176           NA     NA       NA       NA       NA       NA 
   rs34383433           NA     NA       NA       NA       NA       NA 
   rs10197806           NA     NA       NA       NA       NA       NA 
-   rs7977174           NA     NA       NA       NA       NA       NA 
+   rs7977174    rs1846644   0.19    -48.3    0.032    CC/TT        1 
    rs7142872   rs34059199  0.728     5.42  0.00041    GC/CA        1 
   rs11855923           NA     NA       NA       NA       NA       NA 
   rs11070285           NA     NA       NA       NA       NA       NA 
-   rs2019247           NA     NA       NA       NA       NA       NA 
+   rs2019247    rs7233464  0.557    -2.22   0.0011    GA/CG        1 
    rs7279294   rs73363923  0.664   -0.861  0.00038    TA/CG        1 
    rs1316844           NA     NA       NA       NA       NA       NA 
   rs62133268           NA     NA       NA       NA       NA       NA 
@@ -145,12 +145,12 @@
    rs2445888    rs2446961      1    0.482  1.7e-05    TA/CG        1 
   rs17643358           NA     NA       NA       NA       NA       NA 
   rs62361905           NA     NA       NA       NA       NA       NA 
-  rs62361907           NA     NA       NA       NA       NA       NA 
+  rs62361907   rs10042443 0.0506      256    0.014    GT/AC        1 
     rs649330   rs17651289  0.991   -0.779  2.4e-05    CT/TC        1 
-   rs9506126           NA     NA       NA       NA       NA       NA 
-  rs12880534           NA     NA       NA       NA       NA       NA 
+   rs9506126   rs61948172  0.251    -11.4   0.0057    GT/AG        1 
+  rs12880534   rs72682499  0.063     -280    0.049    TA/CG        1 
  rs113773802   rs59936351  0.623    -6.52  1.6e-05    TG/CA        1 
-   rs4673802   rs17591301  0.251     -228  0.00032    GC/AT        1 
+   rs4673802    rs6705678  0.586     3.06   0.0061    GT/AC        1 
    rs6451576           NA     NA       NA       NA       NA       NA 
   rs62361896           NA     NA       NA       NA       NA       NA 
   rs62361901           NA     NA       NA       NA       NA       NA 
@@ -167,7 +167,7 @@
     rs327261           NA     NA       NA       NA       NA       NA 
     rs327260           NA     NA       NA       NA       NA       NA 
  rs112501855  rs188711069  0.975     0.32  2.9e-05    CC/TT        1 
- rs116552240           NA     NA       NA       NA       NA       NA 
+ rs116552240     rs657152  0.973    -9.83   0.0062    AA/TC        1 
    rs8180684    rs9390026      1    0.337  2.3e-05    TT/CC        1 
    rs2050311    rs8180684      1    -5.89  2.1e-05    AT/GC        1 
   rs12137672   rs12137455  0.902   -0.716    2e-05    TT/CC        1 
@@ -175,7 +175,7 @@
   rs12656770           NA     NA       NA       NA       NA       NA 
     rs162090           NA     NA       NA       NA       NA       NA 
   rs10484875     rs649330  0.791      5.9  1.8e-05    TC/CT        1 
-   rs6415872    rs7083526  0.922     15.2  4.2e-05    GT/AC        1 
+   rs6415872    rs7918242 0.0576     31.2    0.011    GA/AC        1 
    rs2065046           NA     NA       NA       NA       NA       NA 
    rs2065047           NA     NA       NA       NA       NA       NA 
    rs1983763           NA     NA       NA       NA       NA       NA 
@@ -186,7 +186,7 @@
   rs11205808           NA     NA       NA       NA       NA       NA 
    rs9390026           NA     NA       NA       NA       NA       NA 
    rs2331769           NA     NA       NA       NA       NA       NA 
-   rs2331714           NA     NA       NA       NA       NA       NA 
+   rs2331714   rs67157457  0.051    -79.6    0.023    AC/GA        1 
    rs7541663           NA     NA       NA       NA       NA       NA 
   rs35685986     rs306186  0.514   -0.011  7.3e-07    GT/CC        1 
   rs12659227           NA     NA       NA       NA       NA       NA 
@@ -202,15 +202,15 @@
   rs10135074           NA     NA       NA       NA       NA       NA 
   rs10134338           NA     NA       NA       NA       NA       NA 
    rs8008775           NA     NA       NA       NA       NA       NA 
-  rs55650444           NA     NA       NA       NA       NA       NA 
+  rs55650444    rs8019656 0.0551     8.77    0.028    TC/AT        1 
   rs11850695           NA     NA       NA       NA       NA       NA 
    rs1769629           NA     NA       NA       NA       NA       NA 
  rs111565918           NA     NA       NA       NA       NA       NA 
- rs113960175           NA     NA       NA       NA       NA       NA 
+ rs113960175    rs2356868 0.0507     -764   0.0032    GC/AT        1 
    rs8009463           NA     NA       NA       NA       NA       NA 
    rs2331771           NA     NA       NA       NA       NA       NA 
   rs56714188           NA     NA       NA       NA       NA       NA 
-   rs1328114           NA     NA       NA       NA       NA       NA 
+   rs1328114    rs9909113  0.531      139    0.014    TA/AT        1 
   rs11785168    rs7461808      1   -0.519  3.2e-05    AT/GC        1 
   rs11779310   rs11785168  0.989    -1.55  2.8e-05    GA/AG        1 
    rs7921378    rs6415872  0.932    -14.2  2.2e-05    CA/GG        1 
@@ -228,17 +228,17 @@
    rs1866170           NA     NA       NA       NA       NA       NA 
   rs35405544   rs12903580  0.813     20.3  0.00047    TC/CT        1 
   rs13408314           NA     NA       NA       NA       NA       NA 
-  rs62361895           NA     NA       NA       NA       NA       NA 
-    rs683369  rs112201728  0.236    0.282  0.00031    GT/CC        1 
+  rs62361895   rs13360629 0.0537     -280    0.012    TT/CC        1 
+    rs683369     rs416572  0.531    -83.3   0.0018    GT/CC        1 
   rs56258927           NA     NA       NA       NA       NA       NA 
    rs2393780           NA     NA       NA       NA       NA       NA 
    rs7955803           NA     NA       NA       NA       NA       NA 
-   rs4255679    rs9537058  0.861     17.1  0.00013    AT/TC        1 
+   rs4255679    rs1890464  0.867    -52.6   0.0015    AC/TT        1 
   rs56125130   rs35822716  0.894      105  0.00011    AC/GT        1 
   rs10406271   rs10404464  0.895   -0.664  0.00011    AT/GC        1 
    rs7567638           NA     NA       NA       NA       NA       NA 
   rs17035963           NA     NA       NA       NA       NA       NA 
-    rs295126    rs4673802 0.0884     -144  1.9e-05    CG/AA        1 
+    rs295126    rs1550293  0.277   -0.604    0.012    CG/AA        1 
    rs7461808           NA     NA       NA       NA       NA       NA 
   rs12146987           NA     NA       NA       NA       NA       NA 
   rs11648898    rs8049897  0.966    -21.8  5.2e-05    GA/AG        1 
@@ -250,7 +250,7 @@
   rs11758310    rs6570062  0.955    -1.18    5e-05    GT/CG        1 
   rs72733787           NA     NA       NA       NA       NA       NA 
   rs10448002           NA     NA       NA       NA       NA       NA 
-  rs76004191    rs2094693  0.191     3.68  9.1e-05    TT/AC        1 
+  rs76004191   rs17091793  0.235      -95  0.00082    TG/AT        1 
   rs67921043    rs6051656      1    0.324  3.5e-05    GT/AC        1 
  rs112219432  rs146634384   0.87     -164  6.1e-05    GC/CA        1 
    rs1514953    rs6851973  0.866     33.4  7.1e-05    TA/CG        1 
@@ -267,33 +267,33 @@
    rs7905987           NA     NA       NA       NA       NA       NA 
   rs60017282           NA     NA       NA       NA       NA       NA 
    rs4948487           NA     NA       NA       NA       NA       NA 
-    rs174604           NA     NA       NA       NA       NA       NA 
+    rs174604   rs11230805 0.0542    -23.8    0.046    GC/CT        1 
    rs3749128           NA     NA       NA       NA       NA       NA 
    rs3136608           NA     NA       NA       NA       NA       NA 
  rs112749023   rs10283351  0.693     9.41  7.9e-05    TA/AG        1 
   rs57997165           NA     NA       NA       NA       NA       NA 
     rs939058           NA     NA       NA       NA       NA       NA 
-   rs4894557           NA     NA       NA       NA       NA       NA 
+   rs4894557     rs231979   0.12     20.4   0.0025    TT/GC        1 
    rs3136601           NA     NA       NA       NA       NA       NA 
   rs72699313   rs72699315  0.956     24.6  5.8e-05    CG/AA        1 
   rs11611963           NA     NA       NA       NA       NA       NA 
    rs7328740    rs9542010  0.897     26.9    3e-05    CA/TG        1 
    rs4884856           NA     NA       NA       NA       NA       NA 
-   rs2152778           NA     NA       NA       NA       NA       NA 
+   rs2152778    rs7985324 0.0613      185   0.0069    AA/TG        1 
   rs12560587           NA     NA       NA       NA       NA       NA 
    rs7157118           NA     NA       NA       NA       NA       NA 
    rs1258432    rs1713930   0.91    -13.3  0.00022    AA/TG        1 
-  rs57963560    rs4502565  0.241     18.7  0.00048    GG/CA        1 
+  rs57963560  rs112089751  0.644    -1.97   0.0081    GC/CG        1 
   rs10758658           NA     NA       NA       NA       NA       NA 
   rs71449295           NA     NA       NA       NA       NA       NA 
    rs4923875           NA     NA       NA       NA       NA       NA 
-   rs9304382           NA     NA       NA       NA       NA       NA 
+   rs9304382   rs11664277    0.1    -12.2     0.03    AA/CG        1 
     rs532079    rs1514953  0.846       22  3.5e-05    GT/AC        1 
    rs9376175           NA     NA       NA       NA       NA       NA 
    rs6932515           NA     NA       NA       NA       NA       NA 
   rs58995711           NA     NA       NA       NA       NA       NA 
     rs976401           NA     NA       NA       NA       NA       NA 
-   rs6426385           NA     NA       NA       NA       NA       NA 
+   rs6426385   rs10753364  0.492     0.75    0.012    CA/TG        1 
    rs9859259           NA     NA       NA       NA       NA       NA 
    rs3819772           NA     NA       NA       NA       NA       NA 
    rs7083526           NA     NA       NA       NA       NA       NA 
@@ -301,15 +301,15 @@
    rs7494968           NA     NA       NA       NA       NA       NA 
    rs6492951           NA     NA       NA       NA       NA       NA 
    rs4924479           NA     NA       NA       NA       NA       NA 
-   rs9964304           NA     NA       NA       NA       NA       NA 
+   rs9964304    rs7505997  0.169       35    0.017    CG/AA        1 
    rs9880799           NA     NA       NA       NA       NA       NA 
-   rs9869551           NA     NA       NA       NA       NA       NA 
+   rs9869551   rs12636868 0.0577      150     0.01    TA/GT        1 
   rs17591381           NA     NA       NA       NA       NA       NA 
-   rs2916700           NA     NA       NA       NA       NA       NA 
+   rs2916700    rs1868553  0.074      172    0.049    TC/CA        1 
   rs10821930           NA     NA       NA       NA       NA       NA 
   rs11070277           NA     NA       NA       NA       NA       NA 
   rs12594548           NA     NA       NA       NA       NA       NA 
-   rs4855985   rs12495181  0.446     3.44  0.00031    TT/CC        1 
+   rs4855985   rs11924129  0.832     1.74   0.0018    TC/CT        1 
    rs9811928           NA     NA       NA       NA       NA       NA 
    rs9873546           NA     NA       NA       NA       NA       NA 
    rs1131532           NA     NA       NA       NA       NA       NA 
@@ -324,7 +324,7 @@
    rs4924480           NA     NA       NA       NA       NA       NA 
    rs2412534           NA     NA       NA       NA       NA       NA 
    rs1131542           NA     NA       NA       NA       NA       NA 
- rs113508095           NA     NA       NA       NA       NA       NA 
+ rs113508095    rs3892265  0.464     -205   0.0026    AC/TT        1 
     rs533549    rs2778895  0.937    -23.9  6.6e-05    GC/AT        1 
    rs1576457           NA     NA       NA       NA       NA       NA 
    rs9542005           NA     NA       NA       NA       NA       NA 
@@ -332,9 +332,9 @@
    rs4924478           NA     NA       NA       NA       NA       NA 
    rs1811513           NA     NA       NA       NA       NA       NA 
   rs16959598   rs73545172  0.977    -3.25  7.7e-05    GA/AC        1 
-  rs12935102   rs11648898   0.23      378  3.2e-05    TG/CA        1 
+  rs12935102     rs164737  0.262     -1.9     0.04    TG/CA        1 
   rs60394046           NA     NA       NA       NA       NA       NA 
-  rs10873937           NA     NA       NA       NA       NA       NA 
+  rs10873937    rs2803147 0.0739     16.1   0.0085    TG/CA        1 
    rs1597086           NA     NA       NA       NA       NA       NA 
    rs6414542           NA     NA       NA       NA       NA       NA 
    rs1992869           NA     NA       NA       NA       NA       NA 
@@ -349,16 +349,16 @@
    rs9317830           NA     NA       NA       NA       NA       NA 
    rs1869302           NA     NA       NA       NA       NA       NA 
    rs2959536           NA     NA       NA       NA       NA       NA 
-  rs12903072           NA     NA       NA       NA       NA       NA 
-   rs2841409    rs2841411   0.68    0.257  0.00019    GA/CC        1 
+  rs12903072   rs74619753 0.0515      424    0.023    GT/AC        1 
+   rs2841409    rs1996915   0.26     68.7    0.013    GG/CA        1 
    rs9811639           NA     NA       NA       NA       NA       NA 
    rs9811673           NA     NA       NA       NA       NA       NA 
    rs3136606           NA     NA       NA       NA       NA       NA 
- rs151120086  rs148676146  0.636    -2.73  0.00041    CC/TT        1 
+ rs151120086  rs147852042  0.647    -2.52    0.001    CA/TG        1 
   rs10758657           NA     NA       NA       NA       NA       NA 
   rs28378931   rs35060768  0.976     52.8  0.00023    GC/AT        1 
    rs9542002           NA     NA       NA       NA       NA       NA 
-    rs654317           NA     NA       NA       NA       NA       NA 
+    rs654317   rs57389306  0.062     -5.5    0.019    CA/TT        1 
   rs72915954           NA     NA       NA       NA       NA       NA 
   rs12983845   rs10406271  0.792     1.51  3.1e-05    CA/TG        1 
    rs9811650           NA     NA       NA       NA       NA       NA 
@@ -369,7 +369,7 @@
    rs9831317    rs1021661      1    -1.31  9.6e-05    AT/GC        1 
    rs6570062           NA     NA       NA       NA       NA       NA 
     rs975676           NA     NA       NA       NA       NA       NA 
- rs113759158           NA     NA       NA       NA       NA       NA 
-    rs174475           NA     NA       NA       NA       NA       NA 
+ rs113759158   rs12542463  0.985     3.17   0.0074    AG/GT        1 
+    rs174475   rs11230876 0.0692      124    0.012    CC/GG        1 
    rs9572224           NA     NA       NA       NA       NA       NA 
   rs79939474           NA     NA       NA       NA       NA       NA 
