@@ -54,7 +54,7 @@ _gsdata_/
 # Data
 *.sav
 *.sas7bdat
-*.log
+#*.log
 
 # PolarMorphism
 # PolarMorphism/eur_w_ld_chr*
