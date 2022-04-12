@@ -1,5 +1,5 @@
 ---
-title: "Parsing 1000G GWAS summary statistics for CAC."
+title: "Genetic association analysis of age of ischemic stroke onset: a caveat"
 author: "[Sander W. van der Laan, PhD](https://swvanderlaan.github.io) | @swvanderlaan | s.w.vanderlaan@gmail.com"
 date: "`r Sys.Date()`"
 output:
@@ -34,8 +34,7 @@ knitr::opts_chunk$set(fig.width = 12, fig.height = 8, fig.path = 'Figures/',
                 # usually better for debugging
   echo = TRUE,  # show R code
                       eval = TRUE)
-ggplot2::theme_set(ggplot2::theme_minimal())
-pander::panderOptions("table.split.table", Inf)
+
 ```
 
 # Setup
@@ -72,16 +71,16 @@ PLINK_loc=paste0(STORAGE_loc,"/PLINK")
 AEGSQC_loc =  paste0(PLINK_loc, "/_AE_ORIGINALS/AEGS_COMBINED_QC2018")
 MICHIMP_loc=paste0(PLINK_loc,"/_AE_ORIGINALS/AEGS_COMBINED_EAGLE2_1000Gp3v5HRCr11")
 
-GWAS_loc=paste0(PLINK_loc,"/_GWAS_Datasets/_CHARGE_CAC")
+GWAS_loc=paste0(PLINK_loc,"/_GWAS_Datasets/_SiGN")
 
-PROJECT_loc = paste0(PLINK_loc, "/analyses/consortia/CHARGE_1000G_CAC")
+PROJECT_loc = paste0(PLINK_loc, "/analyses/stroke/AAO_IschemicStroke.git")
 
 # use this if there is relevant information here.
 TARGET_loc = paste0(PROJECT_loc, "/targets")
 
 ### SOME VARIABLES WE NEED DOWN THE LINE
-TRAIT_OF_INTEREST = "CAC" # Phenotype
-PROJECTNAME = "CAC"
+TRAIT_OF_INTEREST = "AAO" # Phenotype
+PROJECTNAME = "AAO"
 
 cat("\nCreate a new analysis directory...\n")
 ifelse(!dir.exists(file.path(PROJECT_loc, "/",PROJECTNAME)), 
@@ -135,6 +134,9 @@ install.packages.auto("tools")
 install.packages.auto("dplyr")
 install.packages.auto("tidyr")
 install.packages.auto("naniar")
+install.packages.auto("pander")
+install.packages.auto("data.table")
+install.packages.auto("R.utils")
 
 # To get 'data.table' with 'fwrite' to be able to directly write gzipped-files
 # Ref: https://stackoverflow.com/questions/42788401/is-possible-to-use-fwrite-from-data-table-with-gzfile
@@ -162,7 +164,8 @@ install.packages.auto("ggplot2")
 install.packages.auto("ggpubr")
 
 install.packages.auto("UpSetR")
-
+library(credentials)
+set_github_pat()
 devtools::install_github("thomasp85/patchwork")
 
 # https://github.com/YinLiLin/CMplot
@@ -172,6 +175,11 @@ library("CMplot")
 # if you want to use the latest version on GitHub:
 # source("https://raw.githubusercontent.com/YinLiLin/CMplot/master/R/CMplot.r")
 
+```
+
+```{r}
+ggplot2::theme_set(ggplot2::theme_minimal())
+pander::panderOptions("table.split.table", Inf)
 ```
 
 *We will create a datestamp and define the Utrecht Science Park Colour Scheme*.
@@ -239,19 +247,47 @@ uithof_color_legend = c("#FBB820", "#F59D10", "#E55738", "#DB003F", "#E35493",
 
 # Introduction
 
-We will parse the data to facilitate the creation of regional association plots for each of the 11 loci.
+We will parse the data to facilitate the creation of regional association plots for the locus/loci, rectangular/circular Manhattan plots, and diagnostic QQ plots.
 
 # Load data
 
 We need to load the data first.
 
-```{r}
+```{r load GWAS all}
 # when we need to load the data
 
-gwas_sumstats <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats_complete.rds"))
+gwas_sumstats_ALL <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats.all.eur.groupcov.rds"))
 
-# gwas_sumstats <- fread(paste0(GWAS_loc,"/CAC1000G_EA_AA_FINAL_FUMA.txt.gz"),
+# gwas_sumstats_ALL <- fread(paste0(GWAS_loc,"/sumstats_AAO/21.04.12.alleur.groupcov.stats.gz"),
 #                          showProgress = TRUE)
+# 
+# saveRDS(gwas_sumstats_ALL, file = paste0(OUT_loc, "/gwas_sumstats.all.eur.groupcov.rds"))
+
+```
+
+
+```{r load GWAS men}
+# when we need to load the data
+
+gwas_sumstats_XY <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats.xy.eur.groupcov.rds"))
+
+# gwas_sumstats_XY <- fread(paste0(GWAS_loc,"/sumstats_AAO/21.04.13.xy.eur.groupcov.stats.gz"),
+#                          showProgress = TRUE)
+# 
+# saveRDS(gwas_sumstats_XY, file = paste0(OUT_loc, "/gwas_sumstats.xy.eur.groupcov.rds"))
+
+```
+
+
+```{r load GWAS women}
+# when we need to load the data
+
+gwas_sumstats_XX <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats.xx.eur.groupcov.rds"))
+
+# gwas_sumstats_XX <- fread(paste0(GWAS_loc,"/sumstats_AAO/21.04.13.xx.eur.groupcov.stats.gz"),
+#                          showProgress = TRUE)
+# 
+# saveRDS(gwas_sumstats_XX, file = paste0(OUT_loc, "/gwas_sumstats.xx.eur.groupcov.rds"))
 
 ```
 
@@ -259,144 +295,152 @@ gwas_sumstats <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats_complete.rds"))
 
 We provide some summary statistics here.
 
+## Sex-combined analyses
 ```{r}
 cat("Getting a head (top) of the summary statistics.\n")
 
-DT::datatable(head(gwas_sumstats), caption = "Top of GWAS Summary Statistics for regional association plots") 
+DT::datatable(head(gwas_sumstats_ALL)) 
 
 ```
 
 ```{r}
 cat("\n\nGetting summary statistics.\n")
-summary(gwas_sumstats)
+summary(gwas_sumstats_ALL)
 
 ```
 
 ```{r}
 
-cat(paste0("\nTotal number of variants: "), format(length(gwas_sumstats$Chr), big.mark = ","),".\n")
+cat(paste0("\nTotal number of variants: "), format(length(gwas_sumstats_ALL$CHR), big.mark = ","),".\n")
 
-cat(paste0("\nAvailable chromosomes: "), format(unique(gwas_sumstats$Chr), big.mark = ","),".\n")
+cat(paste0("\nAvailable chromosomes: "), format(unique(gwas_sumstats_ALL$CHR), big.mark = ","),".\n")
 
 cat("\n\nEffect allele frequency summary: \n")
-summary(gwas_sumstats$Freq1)
+summary(gwas_sumstats_ALL$A1FREQ)
 
 
 cat("\nEffect size summary: \n")
-summary(gwas_sumstats$Effect)
+summary(gwas_sumstats_ALL$BETA)
 
 ```
 
-## Plotting
+## Men-only analyses
 
 ```{r}
+cat("Getting a head (top) of the summary statistics.\n")
 
-gghistogram(
-  gwas_sumstats,
-  x = "Freq1",
-  y = "..count..",
-  color = uithof_color[16],
-  fill = uithof_color[16],
-  linetype = "solid",
-  alpha = 0.5,
-  bins = 50,
-  title = "Effect allele frequency distribution",
-  xlab = "effect allele frequency",
-  ylab = "counts",
-  add = "median",
-  add.params = list(linetype = "dashed"),
-  ggtheme = theme_pubr())
+DT::datatable(head(gwas_sumstats_XY)) 
+
 ```
 
 ```{r}
-
-gghistogram(
-  gwas_sumstats,
-  x = "Effect",
-  y = "..count..",
-  color = uithof_color[3],
-  fill = uithof_color[3],
-  linetype = "solid",
-  alpha = 0.5,
-  bins = 50,
-  title = "Effect size distribution",
-  xlab = "effect size",
-  ylab = "counts",
-  add = "median",
-  add.params = list(linetype = "dashed"),
-  ggtheme = theme_pubr())
-
-```
-
-# Extracting data
-
-We are interested in 11 top loci.
-
-```{r}
-library(openxlsx)
-variant_list <- read.xlsx(paste0(TARGET_loc, "/Variants.xlsx"), sheet = "TopLoci")
-
-variant_list852 <- read.xlsx(paste0(TARGET_loc, "/Variants.xlsx"), sheet = "Variants_20211111")
-
-
-DT::datatable(variant_list)
+cat("\n\nGetting summary statistics.\n")
+summary(gwas_sumstats_XY)
 
 ```
 
 ```{r}
 
-gwas_sumstats_top <- merge(gwas_sumstats, variant_list852, 
-                           by.x = "rsID", by.y = "RSID", 
-                           sort = FALSE, all.y = TRUE)
+cat(paste0("\nTotal number of variants: "), format(length(gwas_sumstats_XY$CHR), big.mark = ","),".\n")
+
+cat(paste0("\nAvailable chromosomes: "), format(unique(gwas_sumstats_XY$CHR), big.mark = ","),".\n")
+
+cat("\n\nEffect allele frequency summary: \n")
+summary(gwas_sumstats_XY$A1FREQ)
+
+
+cat("\nEffect size summary: \n")
+summary(gwas_sumstats_XY$BETA)
 
 ```
 
-
-# MAF vs Effects
+## Women-only analyses
 
 ```{r}
-library(dplyr)
-gwas_sumstats_topr <- gwas_sumstats_top %>%
-         arrange(desc(Type))
+cat("Getting a head (top) of the summary statistics.\n")
 
-p1 <- ggscatter(gwas_sumstats_topr,
-                x = "MAF",
-                y = "Effect",
-                xlab = "minor allele frequency",
-                ylab = "effect size",
-                ylim = c(-0.45, 0.45),
-                color = "Type", fill = "Type",
-                palette = c(uithof_color[4], 
-                            uithof_color[16], 
-                            uithof_color[28]),
-                repel = TRUE, 
-                label = gwas_sumstats_topr$TargetGene, 
-                # label.rectangle = TRUE,
-                # legend = "none",
-                show.legend.text = FALSE,
-                ggtheme = theme_pubr()) + 
-                # ggrepel::geom_text_repel(label = gwas_sumstats_top$rsID) +
-                geom_hline(yintercept = 0, linetype = "dashed", size = 0.50, color = uithof_color[26]) + 
-                theme(axis.line.x = element_blank()) 
+DT::datatable(head(gwas_sumstats_XX)) 
 
-print(p1)
+```
 
-ggsave(filename = paste0(PLOT_loc, "/", Today, ".topvariants852_effect_vs_freq.png"), plot = last_plot())
-ggsave(filename = paste0(PLOT_loc, "/", Today, ".topvariants852_effect_vs_freq.pdf"), plot = last_plot())
-ggsave(filename = paste0(PLOT_loc, "/", Today, ".topvariants852_effect_vs_freq.eps"), plot = last_plot())
+```{r}
+cat("\n\nGetting summary statistics.\n")
+summary(gwas_sumstats_XX)
+
+```
+
+```{r}
+
+cat(paste0("\nTotal number of variants: "), format(length(gwas_sumstats_XX$CHR), big.mark = ","),".\n")
+
+cat(paste0("\nAvailable chromosomes: "), format(unique(gwas_sumstats_XX$CHR), big.mark = ","),".\n")
+
+cat("\n\nEffect allele frequency summary: \n")
+summary(gwas_sumstats_XX$A1FREQ)
 
 
+cat("\nEffect size summary: \n")
+summary(gwas_sumstats_XX$BETA)
+
+```
+
+# Top hits
+
+We should get the independent top hits per stratum at p < 5.0x10<sup>-5</sup> for replication purposes, and at p < 5.0x10<sup>-8</sup> for reporting of the Discovery phase.
+
+```
+bash scripts/clump.aao.sh
 ```
 
 # Cleaning
 
 Since we don't need all the data, we will drop some here.
 
-```{r}
-gwas_sumstats_racer <- subset(gwas_sumstats,
-                              select = c("MarkerName", "rsID", "Chr", "Position", "Pvalue"))
+## Sex-combined analyses
 
-saveRDS(gwas_sumstats_racer, file = paste0(OUT_loc, "/gwas_sumstats_racer.rds"))
+```{r}
+# str(gwas_sumstats_ALL)
+# Classes ‘data.table’ and 'data.frame':	6750510 obs. of  11 variables:
+#  $ SNP           : chr  "rs58108140" "rs180734498" "rs140337953" "rs116400033" ...
+#  $ CHR           : int  1 1 1 1 1 1 1 1 1 1 ...
+#  $ BP            : int  10583 13302 30923 51479 54490 54676 55299 58814 59040 61987 ...
+#  $ GENPOS        : int  0 0 0 0 0 0 0 0 0 0 ...
+#  $ ALLELE1       : chr  "G" "C" "G" "T" ...
+#  $ ALLELE0       : chr  "A" "T" "T" "A" ...
+#  $ A1FREQ        : num  0.85 0.907 0.166 0.819 0.823 ...
+#  $ INFO          : num  0.301 0.333 0.33 0.318 0.323 ...
+#  $ BETA          : num  -0.6588 -0.1397 0.3179 -0.1993 -0.0355 ...
+#  $ SE            : num  0.424 0.51 0.404 0.384 0.383 ...
+#  $ P_BOLT_LMM_INF: num  0.12 0.78 0.43 0.6 0.93 0.51 0.059 0.053 0.085 0.86 ...
+#  - attr(*, ".internal.selfref")=<externalptr> 
+#   
+
+gwas_sumstats_racer_ALL <- subset(gwas_sumstats_ALL,
+                              select = c("SNP", "CHR", "BP", "P_BOLT_LMM_INF"))
+
+saveRDS(gwas_sumstats_racer_ALL, file = paste0(OUT_loc, "/gwas_sumstats_racer.all.eur.groupcov.rds"))
+
+```
+
+## Men-only analyses
+
+```{r }
+
+gwas_sumstats_racer_XY <- subset(gwas_sumstats_ALL,
+                              select = c("SNP", "CHR", "BP", "P_BOLT_LMM_INF"))
+
+saveRDS(gwas_sumstats_racer_XY, file = paste0(OUT_loc, "/gwas_sumstats_racer.xy.eur.groupcov.rds"))
+
+
+```
+
+## Women-only analyses
+
+```{r }
+gwas_sumstats_racer_XX <- subset(gwas_sumstats_ALL,
+                              select = c("SNP", "CHR", "BP", "P_BOLT_LMM_INF"))
+
+saveRDS(gwas_sumstats_racer_XX, file = paste0(OUT_loc, "/gwas_sumstats_racer.xx.eur.groupcov.rds"))
 
 ```
 
@@ -404,16 +448,13 @@ saveRDS(gwas_sumstats_racer, file = paste0(OUT_loc, "/gwas_sumstats_racer.rds"))
 
 ------------------------------------------------------------------------
 
-    Version:      v1.2.0
-    Last update:  2022-01-28
+    Version:      v1.0.0
+    Last update:  2022-04-12
     Written by:   Sander W. van der Laan (s.w.vanderlaan-2[at]umcutrecht.nl).
     Description:  Script to parse GWAS summary statistics.
     Minimum requirements: R version 3.4.3 (2017-06-30) -- 'Single Candle', Mac OS X El Capitan.
 
     Changes log
-    * v1.2.0 Added effect vs frequency graph.
-    * v1.1.0 Reorganize folders and this script.
-    * v1.0.1 Creating regional association plots for the top hits.
     * v1.0.0 Initial version. 
 
 ------------------------------------------------------------------------
@@ -425,11 +466,10 @@ sessionInfo()
 # Saving environment
 
 ```{r Saving}
-# saving the data
-saveRDS(gwas_sumstats, file = paste0(OUT_loc, "/gwas_sumstats_complete.rds"))
 
 # removing it
-rm(gwas_sumstats, gwas_sumstats_racer)
+rm(gwas_sumstats_ALL, gwas_sumstats_XX, gwas_sumstats_XY,
+   gwas_sumstats_racer_ALL, gwas_sumstats_racer_XX, gwas_sumstats_racer_XY)
 
 # saving the environment
 save.image(paste0(PROJECT_loc, "/",Today,".",PROJECTNAME,".Parsing_GWASSumStats.RData"))
