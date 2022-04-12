@@ -256,12 +256,12 @@ We need to load the data first.
 ```{r load GWAS all}
 # when we need to load the data
 
-gwas_sumstats_ALL <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats.all.eur.groupcov.rds"))
+# gwas_sumstats_ALL <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats.all.eur.groupcov.rds"))
 
-# gwas_sumstats_ALL <- fread(paste0(GWAS_loc,"/sumstats_AAO/21.04.12.alleur.groupcov.stats.gz"),
-#                          showProgress = TRUE)
-# 
-# saveRDS(gwas_sumstats_ALL, file = paste0(OUT_loc, "/gwas_sumstats.all.eur.groupcov.rds"))
+gwas_sumstats_ALL <- fread(paste0(GWAS_loc,"/sumstats_AAO/21.04.12.alleur.groupcov.stats.gz"),
+                         showProgress = TRUE)
+
+saveRDS(gwas_sumstats_ALL, file = paste0(OUT_loc, "/gwas_sumstats.all.eur.groupcov.rds"))
 
 ```
 
@@ -269,12 +269,12 @@ gwas_sumstats_ALL <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats.all.eur.grou
 ```{r load GWAS men}
 # when we need to load the data
 
-gwas_sumstats_XY <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats.xy.eur.groupcov.rds"))
+# gwas_sumstats_XY <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats.xy.eur.groupcov.rds"))
 
-# gwas_sumstats_XY <- fread(paste0(GWAS_loc,"/sumstats_AAO/21.04.13.xy.eur.groupcov.stats.gz"),
-#                          showProgress = TRUE)
-# 
-# saveRDS(gwas_sumstats_XY, file = paste0(OUT_loc, "/gwas_sumstats.xy.eur.groupcov.rds"))
+gwas_sumstats_XY <- fread(paste0(GWAS_loc,"/sumstats_AAO/21.04.13.xy.eur.groupcov.stats.gz"),
+                         showProgress = TRUE)
+
+saveRDS(gwas_sumstats_XY, file = paste0(OUT_loc, "/gwas_sumstats.xy.eur.groupcov.rds"))
 
 ```
 
@@ -282,12 +282,12 @@ gwas_sumstats_XY <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats.xy.eur.groupc
 ```{r load GWAS women}
 # when we need to load the data
 
-gwas_sumstats_XX <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats.xx.eur.groupcov.rds"))
+# gwas_sumstats_XX <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats.xx.eur.groupcov.rds"))
 
-# gwas_sumstats_XX <- fread(paste0(GWAS_loc,"/sumstats_AAO/21.04.13.xx.eur.groupcov.stats.gz"),
-#                          showProgress = TRUE)
-# 
-# saveRDS(gwas_sumstats_XX, file = paste0(OUT_loc, "/gwas_sumstats.xx.eur.groupcov.rds"))
+gwas_sumstats_XX <- fread(paste0(GWAS_loc,"/sumstats_AAO/21.04.13.xx.eur.groupcov.stats.gz"),
+                         showProgress = TRUE)
+
+saveRDS(gwas_sumstats_XX, file = paste0(OUT_loc, "/gwas_sumstats.xx.eur.groupcov.rds"))
 
 ```
 
@@ -392,6 +392,14 @@ We should get the independent top hits per stratum at p < 5.0x10<sup>-5</sup> fo
 bash scripts/clump.aao.sh
 ```
 
+This revealed one genome-wide significant hit in the men-only analyses. 
+
+```{bash}
+RESULTS_loc="/Users/swvanderlaan/PLINK/analyses/stroke/AAO_IschemicStroke.git"
+cat $RESULTS_loc/AAO/OUTPUT/21.04.13.xy.eur.groupcov.stats.gwaslevel.clumped
+```
+
+
 # Cleaning
 
 Since we don't need all the data, we will drop some here.
@@ -399,6 +407,7 @@ Since we don't need all the data, we will drop some here.
 ## Sex-combined analyses
 
 ```{r}
+
 # str(gwas_sumstats_ALL)
 # Classes ‘data.table’ and 'data.frame':	6750510 obs. of  11 variables:
 #  $ SNP           : chr  "rs58108140" "rs180734498" "rs140337953" "rs116400033" ...
@@ -426,7 +435,7 @@ saveRDS(gwas_sumstats_racer_ALL, file = paste0(OUT_loc, "/gwas_sumstats_racer.al
 
 ```{r }
 
-gwas_sumstats_racer_XY <- subset(gwas_sumstats_ALL,
+gwas_sumstats_racer_XY <- subset(gwas_sumstats_XY,
                               select = c("SNP", "CHR", "BP", "P_BOLT_LMM_INF"))
 
 saveRDS(gwas_sumstats_racer_XY, file = paste0(OUT_loc, "/gwas_sumstats_racer.xy.eur.groupcov.rds"))
@@ -437,7 +446,7 @@ saveRDS(gwas_sumstats_racer_XY, file = paste0(OUT_loc, "/gwas_sumstats_racer.xy.
 ## Women-only analyses
 
 ```{r }
-gwas_sumstats_racer_XX <- subset(gwas_sumstats_ALL,
+gwas_sumstats_racer_XX <- subset(gwas_sumstats_XX,
                               select = c("SNP", "CHR", "BP", "P_BOLT_LMM_INF"))
 
 saveRDS(gwas_sumstats_racer_XX, file = paste0(OUT_loc, "/gwas_sumstats_racer.xx.eur.groupcov.rds"))
