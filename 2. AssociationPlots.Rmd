@@ -1,5 +1,5 @@
 ---
-title: "Regional association plotting for age of ischemic stroke onset."
+title: "Regional association, Manhattan, and QQ plotting for age of ischemic stroke onset."
 author: "[Sander W. van der Laan, PhD](https://swvanderlaan.github.io) | @swvanderlaan | s.w.vanderlaan@gmail.com"
 date: "`r Sys.Date()`"
 output:
@@ -108,11 +108,6 @@ ifelse(!dir.exists(file.path(ANALYSIS_loc, "/BASELINE")),
        FALSE)
 BASELINE_loc = paste0(ANALYSIS_loc, "/BASELINE")
 
-ifelse(!dir.exists(file.path(PROJECT_loc, "/SNP")), 
-       dir.create(file.path(PROJECT_loc, "/SNP")), 
-       FALSE)
-SNP_loc = paste0(PROJECT_loc, "/SNP")
-
 setwd(paste0(PROJECT_loc))
 getwd()
 list.files()
@@ -188,6 +183,14 @@ install.packages.auto("ggsci")
 
 # plotly
 # install.packages.auto("plotly")
+
+# for coloc
+# https://github.com/chr1swallace/coloc
+if(!require("remotes"))
+   install.packages.auto("remotes") # if necessary
+library(remotes)
+install_github("chr1swallace/coloc@main", build_vignettes = FALSE)
+
 
 ```
 
@@ -282,9 +285,9 @@ We need to load the data first.
 
 gwas_sumstats_racer_ALL <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats_racer.all.eur.groupcov.rds"))
 
-gwas_sumstats_racer_XX <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats_racer.xx.eur.groupcov.rds"))
-
 gwas_sumstats_racer_XY <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats_racer.xy.eur.groupcov.rds"))
+
+gwas_sumstats_racer_XX <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats_racer.xx.eur.groupcov.rds"))
 
 # str(gwas_sumstats_racer_ALL)
 # Classes ‘data.table’ and 'data.frame':	6750510 obs. of  4 variables:
@@ -322,10 +325,10 @@ RANGE=250000
 ```{r}
 library(RACER)
 # Make directory for plots
-ifelse(!dir.exists(file.path(PROJECT_loc, "/RACER")), 
-       dir.create(file.path(PROJECT_loc, "/RACER")), 
+ifelse(!dir.exists(file.path(PLOT_loc, "/RACER")), 
+       dir.create(file.path(PLOT_loc, "/RACER")), 
        FALSE)
-RACER_loc = paste0(PROJECT_loc,"/RACER")
+RACER_loc = paste0(PLOT_loc,"/RACER")
 
 variants_of_interest <- c(variant_list$rsID)
 
@@ -377,10 +380,10 @@ for(VARIANT in variants_of_interest){
 
 library(RACER)
 # Make directory for plots
-ifelse(!dir.exists(file.path(PROJECT_loc, "/RACER")), 
-       dir.create(file.path(PROJECT_loc, "/RACER")), 
+ifelse(!dir.exists(file.path(PLOT_loc, "/RACER")), 
+       dir.create(file.path(PLOT_loc, "/RACER")), 
        FALSE)
-RACER_loc = paste0(PROJECT_loc,"/RACER")
+RACER_loc = paste0(PLOT_loc,"/RACER")
 
 variants_of_interest <- c(variant_list$rsID)
 # variants_of_interest_test <- "rs6051656"
@@ -431,10 +434,10 @@ for(VARIANT in variants_of_interest){
 ```{r}
 library(RACER)
 # Make directory for plots
-ifelse(!dir.exists(file.path(PROJECT_loc, "/RACER")), 
-       dir.create(file.path(PROJECT_loc, "/RACER")), 
+ifelse(!dir.exists(file.path(PLOT_loc, "/RACER")), 
+       dir.create(file.path(PLOT_loc, "/RACER")), 
        FALSE)
-RACER_loc = paste0(PROJECT_loc,"/RACER")
+RACER_loc = paste0(PLOT_loc,"/RACER")
 
 variants_of_interest <- c(variant_list$rsID)
 
@@ -479,17 +482,353 @@ for(VARIANT in variants_of_interest){
 
 ```
 
+### Comparing the sexes
+
+We can compare, visually, the men-only and women-only results.
+
+```{r}
+library(RACER)
+# Make directory for plots
+ifelse(!dir.exists(file.path(PLOT_loc, "/RACER")), 
+       dir.create(file.path(PLOT_loc, "/RACER")), 
+       FALSE)
+RACER_loc = paste0(PLOT_loc,"/RACER")
+
+RANGE=100000
+variants_of_interest <- c(variant_list$rsID)
+
+for(VARIANT in variants_of_interest){
+  cat(paste0("Getting data for ", VARIANT,".\n"))
+
+  tempCHR <- subset(variant_list, rsID == VARIANT)[,2]
+  tempSTART <- subset(variant_list, rsID == VARIANT)[,3] - RANGE
+  tempEND <- subset(variant_list, rsID == VARIANT)[,3] + RANGE
+  tempVARIANTnr <- subset(variant_list, rsID == VARIANT)[,1]
+  tempLOCUS <- subset(variant_list, rsID == VARIANT)[,4]
+
+  cat("\nSubset required data.\n")
+  temp_XX <- subset(gwas_sumstats_racer_XX, CHR == tempCHR & (BP >= tempSTART & BP <= tempEND))
+  temp_XY <- subset(gwas_sumstats_racer_XY, CHR == tempCHR & (BP >= tempSTART & BP <= tempEND))
+  
+  cat("\nFormatting association data.\n")
+  temp_f_XX = RACER::formatRACER(assoc_data = temp_XX, chr_col = 2, pos_col = 3, p_col = 4)
+  temp_f_XY = RACER::formatRACER(assoc_data = temp_XY, chr_col = 2, pos_col = 3, p_col = 4)
+
+  cat("\nGetting LD data.\n")
+  temp_f_ld_XX = RACER::ldRACER(assoc_data = temp_f_XX, rs_col = 1, pops = "EUR", lead_snp = VARIANT)
+  temp_f_ld_XY = RACER::ldRACER(assoc_data = temp_f_XY, rs_col = 1, pops = "EUR", lead_snp = VARIANT)
+  
+  cat(paste0("\nPlotting region surrounding ", VARIANT," on ",tempCHR,":",tempSTART,"-",tempEND,".\n"))
+  # source(paste0(PROJECT_loc, "/scripts/functions.R"))
+  p_mirror1 <- mirrorPlotRACER2(assoc_data1 = temp_f_ld_XX, 
+                                assoc_data2 = temp_f_ld_XY, 
+                                name1 = "Women-only", 
+                                name2 = "Men-only", 
+                                chr = tempCHR, plotby = "coord", start_plot = tempSTART, end_plot = tempEND, 
+                                snp_plot = VARIANT,
+                                label_lead = TRUE, gene_track_h = 5)
+  
+  p_scatter1 <- scatterPlotRACER2(assoc_data1 = temp_f_ld_XX, 
+                                  assoc_data2 = temp_f_ld_XY, 
+                                  chr = tempCHR, 
+                                  name1 = "Women-only", 
+                                  name2 = "Men-only", 
+                                  region_start = tempSTART, 
+                                  region_end = tempEND, ld_df = 1, label = TRUE)
+  print(p_mirror1)
+  print(p_scatter1)
+  cat(paste0("Saving images for ", VARIANT,".\n"))
+  ggsave(filename = paste0(RACER_loc, "/", Today, ".", tempVARIANTnr, ".", tempLOCUS,".mirror.regional_assoc.XXvsXY.png"), plot = p_mirror1)
+  ggsave(filename = paste0(RACER_loc, "/", Today, ".", tempVARIANTnr, ".", tempLOCUS,".mirror.regional_assoc.XXvsXY.pdf"), plot = p_mirror1)
+  ggsave(filename = paste0(RACER_loc, "/", Today, ".", tempVARIANTnr, ".", tempLOCUS,".mirror.regional_assoc.XXvsXY.eps"), plot = p_mirror1)
+  
+  ggsave(filename = paste0(RACER_loc, "/", Today, ".", tempVARIANTnr, ".", tempLOCUS,".scatter.regional_assoc.XXvsXY.png"), plot = p_scatter1)
+  ggsave(filename = paste0(RACER_loc, "/", Today, ".", tempVARIANTnr, ".", tempLOCUS,".scatter.regional_assoc.XXvsXY.pdf"), plot = p_scatter1)
+  ggsave(filename = paste0(RACER_loc, "/", Today, ".", tempVARIANTnr, ".", tempLOCUS,".scatter.regional_assoc.XXvsXY.eps"), plot = p_scatter1)
+
+  rm(temp_XX, temp_XY,
+     temp_f_XX, temp_f_XY,
+     temp_f_ld_XX,temp_f_ld_XY)
+  rm(tempCHR, tempSTART, tempEND,
+     p_mirror1, p_scatter1,
+     VARIANT, tempVARIANTnr, tempLOCUS)
+  
+}
+
+
+```
+
+### Colocalisation of sex-stratified signals
+
+We can also formally test the overlap between men and women. 
+
+```{r}
+library(coloc)
+gwas_sumstats_XY <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats.xy.eur.groupcov.rds"))
+
+gwas_sumstats_XX <- readRDS(file = paste0(OUT_loc, "/gwas_sumstats.xx.eur.groupcov.rds"))
+```
+
+
+```{r}
+RANGE=100000
+variants_of_interest <- c(variant_list$rsID)
+
+for(VARIANT in variants_of_interest){
+  cat(paste0("Getting data for ", VARIANT,".\n"))
+
+  tempCHR <- subset(variant_list, rsID == VARIANT)[,2]
+  tempSTART <- subset(variant_list, rsID == VARIANT)[,3] - RANGE
+  tempEND <- subset(variant_list, rsID == VARIANT)[,3] + RANGE
+  tempVARIANTnr <- subset(variant_list, rsID == VARIANT)[,1]
+  tempLOCUS <- subset(variant_list, rsID == VARIANT)[,4]
+
+  cat("\nSubset required data.\n")
+  temp_XX <- subset(gwas_sumstats_XX, CHR == tempCHR & (BP >= tempSTART & BP <= tempEND) & SNP != "-9")
+  temp_XY <- subset(gwas_sumstats_XY, CHR == tempCHR & (BP >= tempSTART & BP <= tempEND) & SNP != "-9")
+  
+  # Ref: https://chr1swallace.github.io/coloc/articles/a02_data.html
+  # var(beta) is the standard error of beta, squared
+  
+  cat("\nCalculate variance from beta.\n")
+  temp_XX$varBETA <- temp_XX$SE^2
+  temp_XY$varBETA <- temp_XY$SE^2
+  
+  cat("\nCreate minimum dataset for women-only.\n")
+  minimum_ccdata_XX = list(
+    c(temp_XX$BETA),
+    c(temp_XX$varBETA),
+    c(temp_XX$SNP),
+    c(temp_XX$BP)
+  )
+  names(minimum_ccdata_XX) <- c("beta", "varbeta", "snp", "position")
+  minimum_ccdata_XX$type = "cc"
+  
+  attr(minimum_ccdata_XX$beta, "names") <- temp_XX$SNP
+  attr(minimum_ccdata_XX$varbeta, "names") <- temp_XX$SNP
+  
+  # str(minimum_ccdata_XX)
+  
+  cat("\nInspect the data for women-only.\n")
+  coloc::plot_dataset(minimum_ccdata_XX)
+  coloc::check_dataset(minimum_ccdata_XX)
+  
+  cat("\nCreate minimum dataset for men-only.\n")
+  minimum_ccdata_XY = list(
+    c(temp_XY$BETA),
+    c(temp_XY$varBETA),
+    c(temp_XY$SNP),
+    c(temp_XY$BP)
+  )
+  names(minimum_ccdata_XY) <- c("beta", "varbeta", "snp", "position")
+  minimum_ccdata_XY$type = "cc"
+  
+  attr(minimum_ccdata_XY$beta, "names") <- temp_XY$SNP
+  attr(minimum_ccdata_XY$varbeta, "names") <- temp_XY$SNP
+  
+  # str(minimum_ccdata_XY)
+  cat("\nInspect the data for women-only.\n")
+  coloc::plot_dataset(minimum_ccdata_XY)
+  coloc::check_dataset(minimum_ccdata_XY)
+
+  cat(paste0("\nFinemap: formally test the colocalisation of the signal between women- and men-only analyses for ",tempVARIANTnr," at ",tempLOCUS,".\n"))
+  # Ref https://chr1swallace.github.io/coloc/articles/a03_enumeration.html
+  res_XX <- finemap.abf(dataset = minimum_ccdata_XX)
+  res_XY <- finemap.abf(dataset = minimum_ccdata_XY)
+  tail(res_XX,3)
+  tail(res_XY,3)
+  
+  res.XXvsXY <- coloc.abf(dataset1 = minimum_ccdata_XX,
+                          dataset2 = minimum_ccdata_XY)
+  
+  cat("\nPosterior probabilities.\n")
+  print(res.XXvsXY)
+  library(tidyverse)
+  res.XXvsXY %>% write_lines(paste0(OUT_loc, "/",tempVARIANTnr,".",tempLOCUS,".coloc.res.XXvsXY.txt"))
+  
+  cat("\nTop results, if any.\n")
+  subset(res.XXvsXY$results, SNP.PP.H4>0.01)
+  
+  
+  o <- order(res.XXvsXY$results$SNP.PP.H4, decreasing = TRUE)
+  cs <- cumsum(res.XXvsXY$results$SNP.PP.H4[o])
+  w <- which(cs > 0.95)[1]
+  res.XXvsXY$results[o,][1:w,]$snp
+  
+  rm(o, cs, w, 
+     res.XXvsXY,
+     minimum_ccdata_XX,
+     minimum_ccdata_XY)
+  
+  rm(tempCHR, tempSTART, tempEND,
+     VARIANT, tempVARIANTnr, tempLOCUS)
+  
+  rm(temp_XX, temp_XY)
+  
+  }
+
+```
+
+# Manhattan and QQ plotting
+
+```{r}
+library(CMplot)
+```
+
+We rename the columns for p-values. 
+
+```{r}
+colnames(gwas_sumstats_racer_ALL)[which(names(gwas_sumstats_racer_ALL) == "P_BOLT_LMM_INF")] <- "Sex-combined"
+colnames(gwas_sumstats_racer_XY)[which(names(gwas_sumstats_racer_XY) == "P_BOLT_LMM_INF")] <- "Men-only"
+colnames(gwas_sumstats_racer_XX)[which(names(gwas_sumstats_racer_XX) == "P_BOLT_LMM_INF")] <- "Women-only"
+```
+
+We merge the data for plotting.
+```{r}
+temp <- gwas_sumstats_racer_ALL %>% filter(SNP != "-9")
+
+temp2 <- merge(temp, 
+               subset(gwas_sumstats_racer_XY, SNP != "-9" || `Sex-combined` > 0, select = c("SNP", "Men-only")),
+               by.x = "SNP", by.y = "SNP", 
+               all.x = TRUE,
+               sort = FALSE)
+
+gwas_sumstats_racer_combo <- merge(temp2, 
+                                   subset(gwas_sumstats_racer_XX, SNP != "-9" || `Sex-combined` > 0, select = c("SNP", "Women-only")),
+                                   by.x = "SNP", by.y = "SNP", 
+                                   all.x = TRUE,
+                                   sort = FALSE)
+rm(temp, temp2)
+
+# str(gwas_sumstats_racer_combo)
+# Classes ‘data.table’ and 'data.frame':	6620618 obs. of  6 variables:
+#  $ SNP         : chr  "rs58108140" "rs180734498" "rs140337953" "rs116400033" ...
+#  $ CHR         : int  1 1 1 1 1 1 1 1 1 1 ...
+#  $ BP          : int  10583 13302 30923 51479 54490 54676 55299 58814 59040 61987 ...
+#  $ Sex-combined: num  0.12 0.78 0.43 0.6 0.93 0.51 0.059 0.053 0.085 0.86 ...
+#  $ Men-only    : num  0.34 0.68 1 0.59 0.45 0.32 0.11 0.049 0.058 0.73 ...
+#  $ Women-only  : num  0.21 0.41 0.22 0.77 0.61 1 0.32 0.43 0.67 0.49 ...
+#  - attr(*, ".internal.selfref")=<externalptr> 
+  
+```
+
+This results in a dataset with 6,620,618 variants with an rsID, instead of 6,750,510. 
+
+
+We also create a set with fewer SNPs, excluding those with p > 0.05, as this will speed up the (Manhattan) plotting.
+
+```{r}
+gwas_sumstats_racer_combo_sub <- gwas_sumstats_racer_combo %>% filter(`Sex-combined` < 0.05)
+
+```
+
+
+List the SNPs of interest.
+
+- _TRIB3_ locus, clumped using PLINK
+- _APOE_ locus, all variants in LD (r<sup>2</sup> >= 0.1) with rs429358 using SNiPA (b37)
+
+```{r}
+trib3_clump <- read.xlsx(paste0(TARGET_loc, "/targets.xlsx"), sheet = "Clump_TRIB3")
+apoe_clump <- read.xlsx(paste0(TARGET_loc, "/targets.xlsx"), sheet = "APOE")
+
+
+```
+
+```{r}
+SNPs <- list(
+	c(apoe_clump$SNP, trib3_clump$SNP),
+	c(apoe_clump$SNP, trib3_clump$SNP),
+	c(apoe_clump$SNP, trib3_clump$SNP)
+)
+```
+
+
+```{r}
+setwd(PLOT_loc)
+CMplot(gwas_sumstats_racer_combo_sub, 
+       plot.type = "m",
+       multracks = TRUE, 
+       col = c(uithof_color[25], uithof_color[16]),
+       ylim = c(0, 9), # make sure all the y-axes are of similar length/size
+       chr.den.col = NULL, # no density plot
+       # bin.size = 1e6,
+       threshold = 5e-8, # GWAS threshold
+       threshold.lty = 2, # type of threshold line
+       threshold.lwd = 1.5, # thickness of threshold line
+       threshold.col = uithof_color[27], # color of threshold line
+       amplify = TRUE, 
+       signal.col = uithof_color[3], # do not change the color of signal
+       signal.cex = 1.15, # make the signal slightly bigger
+       file = "jpg", memo = "",
+       # main.cex = ,
+       dpi = 300, file.output = TRUE, 
+       verbose = TRUE,
+       highlight = SNPs, 
+       # highlight.text = SNPs, 
+       # highlight.text.cex = 1.4,
+       highlight.col = uithof_color[2] # do not change the color of signal
+       )
+setwd(PROJECT_loc)
+
+```
+
+```{r}
+setwd(PLOT_loc)
+CMplot(gwas_sumstats_racer_combo, 
+       plot.type = "q", 
+       multracks = TRUE, 
+       col = uithof_color[16],
+       ylim = c(0, 9),
+       threshold = 5e-8, # GWAS threshold
+       ylab.pos = 2, 
+       signal.pch = 17, # signal sign 
+       signal.cex = 1.15, # size of signal
+       signal.col = uithof_color[3], 
+       conf.int = TRUE, 
+       box = FALSE,
+       cex.axis = 2,
+       file = "jpg", memo = "",
+       # main.cex = ,
+       dpi = 300, file.output = TRUE, 
+       verbose = TRUE
+       
+       )
+setwd(PROJECT_loc)
+```
+## Lambda's
+
+```{r}
+cat("\nCalculating Z-values.\n")
+z_ALL <- qnorm(gwas_sumstats_racer_ALL$`Sex-combined`/2)
+z_XY <- qnorm(gwas_sumstats_racer_XY$`Men-only`/2)
+z_XX <- qnorm(gwas_sumstats_racer_XX$`Women-only`/2)
+     
+#--------------------------------------------------------------------------
+### CALCULATES LAMBDA AND # variants
+cat("\n\nCalculating lambda from data.\n")
+lambda_ALL = round(median(z_ALL^2)/qchisq(0.5, df = 1),3)
+lambda_XY = round(median(z_XY^2)/qchisq(0.5, df = 1),3)
+lambda_XX = round(median(z_XX^2)/qchisq(0.5, df = 1),3)
+cat(paste0("\n* The lambda for sex-combined analyses: ", round(lambda_ALL, digits = 2),"."))
+cat(paste0("\n* The lambda for men-only analyses: ", round(lambda_XY, digits = 2),"."))
+cat(paste0("\n* The lambda for women-only analyses: ", round(lambda_XX, digits = 2),"."))
+
+```
+
+
 # Session information
 
 ------
 
-    Version:      v1.0.0
-    Last update:  2022-04-12
+    Version:      v1.1.0
+    Last update:  2022-04-13
     Written by:   Sander W. van der Laan (s.w.vanderlaan-2[at]umcutrecht.nl).
     Description:  Script to create plot regional association plots.
     Minimum requirements: R version 3.4.3 (2017-06-30) -- 'Single Candle', Mac OS X El Capitan
     
     Changes log
+    * v1.1.0 Added visual comparison plots. Added formal colocalization test. 
     * v1.0.0 Initial version. 
 
 ------
@@ -501,8 +840,9 @@ sessionInfo()
 
 # Saving environment
 ```{r Saving}
-rm(gwas_sumstats_racer_ALL, gwas_sumstats_racer_XX, gwas_sumstats_racer_XY)
-save.image(paste0(PROJECT_loc, "/",Today,".",PROJECTNAME,".RegionalAssociationPlots.RData"))
+rm(gwas_sumstats_racer_ALL, gwas_sumstats_racer_XX, gwas_sumstats_racer_XY,
+   gwas_sumstats_XX, gwas_sumstats_XY)
+save.image(paste0(PROJECT_loc, "/",Today,".",PROJECTNAME,".AssociationPlots.RData"))
 ```
 
 

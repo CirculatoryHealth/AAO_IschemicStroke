@@ -93,11 +93,6 @@ ifelse(!dir.exists(file.path(ANALYSIS_loc, "/PLOTS")),
        FALSE)
 PLOT_loc = paste0(ANALYSIS_loc,"/PLOTS")
 
-ifelse(!dir.exists(file.path(PLOT_loc, "/QC")), 
-       dir.create(file.path(PLOT_loc, "/QC")), 
-       FALSE)
-QC_loc = paste0(PLOT_loc,"/QC")
-
 ifelse(!dir.exists(file.path(ANALYSIS_loc, "/OUTPUT")), 
        dir.create(file.path(ANALYSIS_loc, "/OUTPUT")), 
        FALSE)
@@ -107,11 +102,6 @@ ifelse(!dir.exists(file.path(ANALYSIS_loc, "/BASELINE")),
        dir.create(file.path(ANALYSIS_loc, "/BASELINE")), 
        FALSE)
 BASELINE_loc = paste0(ANALYSIS_loc, "/BASELINE")
-
-ifelse(!dir.exists(file.path(PROJECT_loc, "/SNP")), 
-       dir.create(file.path(PROJECT_loc, "/SNP")), 
-       FALSE)
-SNP_loc = paste0(PROJECT_loc, "/SNP")
 
 setwd(paste0(PROJECT_loc))
 getwd()
