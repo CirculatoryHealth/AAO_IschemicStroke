@@ -66,8 +66,11 @@ install.packages.auto("ggsci")
 
 # for coloc
 # https://github.com/chr1swallace/coloc
+
 if(!require("remotes"))
   install.packages.auto("remotes") # if necessary
 library(remotes)
-install_github("chr1swallace/coloc@main", build_vignettes = FALSE)
 
+remotes::install_github("stephenslab/susieR")
+
+remotes::install_github("chr1swallace/coloc@main", build_vignettes = FALSE)
