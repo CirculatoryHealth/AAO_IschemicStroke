@@ -1,4 +1,5 @@
 # Genetic association analysis of age of ischemic stroke onset: a caveat
+[![DOI](https://zenodo.org/badge/480746009.svg)](https://zenodo.org/badge/latestdoi/480746009)
 
 <!-- Please add a brief introduction to explain what the project is about    -->
 
