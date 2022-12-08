@@ -19,24 +19,29 @@ You can load this project in RStudio by opening the file called 'AAO_IschemicStr
 ## Project structure
 
 <!--  You can add rows to this table, using "|" to separate columns.         -->
-File                         | Description                          | Usage         
----------------------------- | ------------------------------------ | --------------
-README.md                    | Description of project               | Human editable
-LICENSE                      | User permissions                     | Read only     
-AAO_IschemicStroke.git.Rproj | Project file                         | Loads project 
-.worcs                       | WORCS metadata YAML                  | Read only     
-renv.lock                    | Reproducible R environment           | Read only     
-1. Parsing_GWASSumStats.Rmd  | Notebook to plot GWAS data           | Human editable
-2. AssociationPlots.Rmd      | Notebook to create regional plots    | Human editable
-3. SimulationPlot.Rmd        | Notebook for the simulation analysis | Human editable
-4. forest.poster.sign.Rmd    | Notebook to generate the forest plot | Human editable
-AAO                          | Results and plots                    | Human editable
-images                       | Project images                       | Human editable
-meta                         | Results from the meta-GWAS           | Human editable
-scripts                      | Scripts to process data              | Human editable
-simulation_data              | Simulation data                      | Human editable
-scripts                      | Simulation plot                      | Human editable
-targets                      | Targets from this study              | Human editable
+File                         | Description                             | Usage         
+---------------------------- | --------------------------------------- | --------------
+README.md                    | Description of project                  | Human editable
+LICENSE                      | User permissions                        | Read only     
+AAO_IschemicStroke.git.Rproj | Project file                            | Loads project 
+.worcs                       | WORCS metadata YAML                     | Read only     
+renv.lock                    | Reproducible R environment              | Read only     
+1. Parsing_GWASSumStats.Rmd  | Notebook to plot GWAS data              | Human editable
+2. AssociationPlots.Rmd      | Notebook to create regional plots       | Human editable
+3. SimulationPlot.Rmd        | Notebook for the simulation analysis    | Human editable
+4. forest.poster.sign.Rmd    | Notebook to generate the forest plot    | Human editable
+_AAO_archived                | Some scribble-scripts                   | Human editable
+AAO                          | Results and plots                       | Human editable
+finemap                      | Results from finemapping; not used;     |
+                             | available offline                       | Human editable
+images                       | Project images                          | Human editable
+meta                         | Results from the meta-GWAS              | Human editable
+meta_discovery               | Discovery results                       | Human editable
+meta_other_stuff             | Results from meta-analysis;             |
+                             | raw input; not used; available offline  | Human editable
+simulation_data              | Simulation data                         | Human editable
+scripts                      | Simulation plot                         | Human editable
+targets                      | Targets from this study                 | Human editable
 
 <!--  You can consider adding the following to this file:                    -->
 <!--  * A citation reference for your project                                -->
