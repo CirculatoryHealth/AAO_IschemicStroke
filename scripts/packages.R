@@ -2,6 +2,14 @@
 # PACKAGES
 ################################################################################
 
+install.packages.auto("credentials")
+library("credentials")
+# credentials::set_github_pat()
+
+install.packages.auto("R.utils")
+
+install.packages.auto("worcs")
+
 install.packages.auto("readr")
 install.packages.auto("optparse")
 install.packages.auto("tools")
@@ -9,7 +17,7 @@ install.packages.auto("dplyr")
 install.packages.auto("tidyr")
 install.packages.auto("naniar")
 install.packages.auto("pander")
-install.packages.auto("R.utils")
+
 install.packages.auto("openxlsx")
 
 # To get 'data.table' with 'fwrite' to be able to directly write gzipped-files
@@ -40,8 +48,6 @@ install.packages.auto("ggpubr")
 install.packages.auto("ggrepel")
 
 install.packages.auto("UpSetR")
-library(credentials)
-set_github_pat()
 devtools::install_github("thomasp85/patchwork")
 
 # https://github.com/YinLiLin/CMplot
@@ -52,7 +58,7 @@ library("CMplot")
 # source("https://raw.githubusercontent.com/YinLiLin/CMplot/master/R/CMplot.r")
 
 # For regional association plots
-install_github("oliviasabik/RACER") 
+devtools::install_github("oliviasabik/RACER") 
 
 # Install ggrepel package if needed
 

@@ -1,0 +1,2 @@
+MarkerName	Allele1	Allele2	Freq1	FreqSE	MinFreq	MaxFreq	Effect	StdErr	P-value	Direction
+rs429358	t	c	0.8616	0.0186	0.8251	0.8720	1.2854	0.1926	2.476e-11	+++

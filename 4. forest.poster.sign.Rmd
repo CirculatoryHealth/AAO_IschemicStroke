@@ -53,17 +53,12 @@ rm(list = ls())
 
 ```{r LocalSystem, echo = FALSE}
 ### Operating System Version 
-### MacBook Pro
-# ROOT_loc = "/Users/swvanderlaan/iCloud"
-# AEROOT_loc = "/Users/swvanderlaan"
-# STORAGE_loc = "/Volumes/LaCie/"
-# STORAGE_loc = "/Users/swvanderlaan"
 
-### MacBook Air
+### MacBook Pro
 ROOT_loc = "/Users/slaan3/OneDrive - UMC Utrecht"
 AEROOT_loc = "/Users/slaan3"
-STORAGE_loc = "/Volumes/LaCie/"
-# STORAGE_loc = "/Users/slaan3/"
+# STORAGE_loc = "/Volumes/LaCie/"
+STORAGE_loc = "/Users/slaan3/"
 
 GENOMIC_loc = paste0(ROOT_loc, "/Genomics")
 AEDB_loc = paste0(AEROOT_loc, "/Athero-Express/AE-AAA_GS_DBs")
@@ -75,7 +70,7 @@ MICHIMP_loc=paste0(PLINK_loc,"/_AE_ORIGINALS/AEGS_COMBINED_EAGLE2_1000Gp3v5HRCr1
 
 GWAS_loc=paste0(PLINK_loc,"/_GWAS_Datasets/_SiGN")
 
-PROJECT_loc = paste0(PLINK_loc, "/analyses/stroke/AAO_IschemicStroke")
+PROJECT_loc = paste0(AEROOT_loc, "/git/CirculatoryHealth/AAO_IschemicStroke")
 
 # use this if there is relevant information here.
 TARGET_loc = paste0(PROJECT_loc, "/targets")
@@ -141,60 +136,8 @@ _We will create a datestamp and define the Utrecht Science Park Colour Scheme_.
 Today = format(as.Date(as.POSIXlt(Sys.time())), "%Y%m%d")
 Today.Report = format(as.Date(as.POSIXlt(Sys.time())), "%A, %B %d, %Y")
 
-### UtrechtScienceParkColoursScheme
-###
-### WebsitetoconvertHEXtoRGB:http://hex.colorrrs.com.
-### Forsomefunctionsyoushoulddividethesenumbersby255.
-###
-###	No.	Color			      HEX	(RGB)						              CHR		  MAF/INFO
-###---------------------------------------------------------------------------------------
-###	1	  yellow			    #FBB820 (251,184,32)				      =>	1		or 1.0>INFO
-###	2	  gold			      #F59D10 (245,157,16)				      =>	2		
-###	3	  salmon			    #E55738 (229,87,56)				      =>	3		or 0.05<MAF<0.2 or 0.4<INFO<0.6
-###	4	  darkpink		    #DB003F ((219,0,63)				      =>	4		
-###	5	  lightpink		    #E35493 (227,84,147)				      =>	5		or 0.8<INFO<1.0
-###	6	  pink			      #D5267B (213,38,123)				      =>	6		
-###	7	  hardpink		    #CC0071 (204,0,113)				      =>	7		
-###	8	  lightpurple	    #A8448A (168,68,138)				      =>	8		
-###	9	  purple			    #9A3480 (154,52,128)				      =>	9		
-###	10	lavendel		    #8D5B9A (141,91,154)				      =>	10		
-###	11	bluepurple		  #705296 (112,82,150)				      =>	11		
-###	12	purpleblue		  #686AA9 (104,106,169)			      =>	12		
-###	13	lightpurpleblue	#6173AD (97,115,173/101,120,180)	=>	13		
-###	14	seablue			    #4C81BF (76,129,191)				      =>	14		
-###	15	skyblue			    #2F8BC9 (47,139,201)				      =>	15		
-###	16	azurblue		    #1290D9 (18,144,217)				      =>	16		or 0.01<MAF<0.05 or 0.2<INFO<0.4
-###	17	lightazurblue	  #1396D8 (19,150,216)				      =>	17		
-###	18	greenblue		    #15A6C1 (21,166,193)				      =>	18		
-###	19	seaweedgreen	  #5EB17F (94,177,127)				      =>	19		
-###	20	yellowgreen		  #86B833 (134,184,51)				      =>	20		
-###	21	lightmossgreen	#C5D220 (197,210,32)				      =>	21		
-###	22	mossgreen		    #9FC228 (159,194,40)				      =>	22		or MAF>0.20 or 0.6<INFO<0.8
-###	23	lightgreen	  	#78B113 (120,177,19)				      =>	23/X
-###	24	green			      #49A01D (73,160,29)				      =>	24/Y
-###	25	grey			      #595A5C (89,90,92)				        =>	25/XY	or MAF<0.01 or 0.0<INFO<0.2
-###	26	lightgrey		    #A2A3A4	(162,163,164)			      =>	26/MT
-### 
-###	ADDITIONAL COLORS
-###	27	midgrey			#D7D8D7
-###	28	verylightgrey	#ECECEC"
-###	29	white			#FFFFFF
-###	30	black			#000000
-###----------------------------------------------------------------------------------------------
+source(paste0(PROJECT_loc,"/scripts/colors.R"))
 
-uithof_color = c("#FBB820","#F59D10","#E55738","#DB003F","#E35493","#D5267B",
-                 "#CC0071","#A8448A","#9A3480","#8D5B9A","#705296","#686AA9",
-                 "#6173AD","#4C81BF","#2F8BC9","#1290D9","#1396D8","#15A6C1",
-                 "#5EB17F","#86B833","#C5D220","#9FC228","#78B113","#49A01D",
-                 "#595A5C","#A2A3A4", "#D7D8D7", "#ECECEC", "#FFFFFF", "#000000")
-
-uithof_color_legend = c("#FBB820", "#F59D10", "#E55738", "#DB003F", "#E35493",
-                        "#D5267B", "#CC0071", "#A8448A", "#9A3480", "#8D5B9A",
-                        "#705296", "#686AA9", "#6173AD", "#4C81BF", "#2F8BC9",
-                        "#1290D9", "#1396D8", "#15A6C1", "#5EB17F", "#86B833",
-                        "#C5D220", "#9FC228", "#78B113", "#49A01D", "#595A5C",
-                        "#A2A3A4", "#D7D8D7", "#ECECEC", "#FFFFFF", "#000000")
-### ----------------------------------------------------------------------------
 ```
 
 # Introduction
@@ -214,16 +157,23 @@ show_col(pal_npg("nrc")(10))
 
 # Prepare data
 
-First we prepare the data for the forest plot. 
+First we prepare the data for the forest plot derived from the meta-analysis. Note that there are two datasets (SiGN and FinnGen) for the combined and the men-only analyses, and three (SiGN, FinnGen, and WHI) for the women-only anlaysis. 
+
 ```{r}
-snps <- read_table(file = "SNP Chr BP GenPos Allele1 Allele0 A1Freq Info Beta SE P A0Freq
-rs429358 19 45411941 0 T C 0.865926 0.961725 1.21275 0.252633 1.6e-6 0.13407400000000003
-rs429358 19 45411941 0 T C 0.868345 0.961725 1.77608 0.401491 9.7e-6 0.13165499999999997
-rs429358 19 45411941 0 T C 0.864025 0.961725 0.802006 0.321942 0.013 0.13597499999999996",
+
+# analyses MarkerName	Allele1	Allele2	Freq1	FreqSE	MinFreq	MaxFreq	Effect	StdErr	P-value	Direction
+# all rs429358	T	C	0.8445	0.0220	0.8219	0.8659	0.8800	0.1812	1.186e-06	++
+# xy rs429358	T	C	0.8419	0.0222	0.8196	0.8640	0.3369	0.2281	0.1396	-+  
+# xx rs429358	T	C	0.8616	0.0186	0.8251	0.8720	1.2854	0.1926	2.476e-11	+++
+
+snps <- read_table(file = "SNP Chr BP Allele1 Allele2 Freq1 FreqSE MinFreq MaxFreq Beta SE P-value Direction
+rs429358 19 45411941 T C 0.8445 0.0220 0.8219 0.8659 0.8800 0.1812 1.186e-06 ++
+rs429358 19 45411941 T C 0.8419 0.0222 0.8196 0.8640 0.3369 0.2281 0.1396 -+  
+rs429358 19 45411941 T C 0.8616 0.0186 0.8251 0.8720 1.2854 0.1926 2.476e-11 +++",
 col_names = TRUE)
 snps
 
-snps$analysis <- factor(c("all", "women", "men"), ordered = TRUE)
+snps$analysis <- factor(c("all", "men", "women"), ordered = TRUE)
 snps %>%
   mutate(ci.l = Beta - 1.96*SE) %>%
   mutate(ci.h = Beta + 1.96*SE) %>%
@@ -231,7 +181,7 @@ snps %>%
 
 ```
 
-
+# Forest plot
 
 ```{r}
 adj <- 0.33333
@@ -281,18 +231,43 @@ ggsave(file = paste0(PLOT_loc, "/21.04.30.forest.SiGN.pdf"), last_plot())
 
 ```
 
+# Difference between sexes
+
+The _ApoE_-rs429358 is associated with stroke AAO in both men and women, although the magnitude of association is seems stronger in women than men. Here we formally test this. 
+
+```{r}
+
+# reference https://stackoverflow.com/questions/62521112/compute-the-difference-between-two-different-regressions-in-r
+set.seed(9114)
+
+compare.coeff <- function(b1,se1,b2,se2){
+delta = b1-b2
+se = sqrt(se1^2+se2^2)
+Zscore = (delta)/se
+p_value = 2*pnorm(-abs(Zscore))
+c(delta=delta,se=se,Zscore=Zscore,p_value=p_value)
+}
+
+compare.coeff(snps$Beta[2], # men
+              snps$SE[2], 
+              snps$Beta[3], # women
+              snps$SE[3])
+
+```
+
 
 # Session information
 
 ------
 
-    Version:      v1.0.0
-    Last update:  2022-05-06
+    Version:      v1.0.1
+    Last update:  2022-12-08
     Written by:   Sander W. van der Laan (s.w.vanderlaan-2[at]umcutrecht.nl).
     Description:  Script to create forest plot.
     Minimum requirements: R version 3.4.3 (2017-06-30) -- 'Single Candle', Mac OS X El Capitan
     
     Changes log
+    * v1.0.1 Updated with WHI data. 
     * v1.0.0 Initial version. 
 
 ------

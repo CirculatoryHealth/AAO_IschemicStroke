@@ -7,9 +7,9 @@ Joanna von Berg, Patrick F. McArdle, Paavo Häppölä, Charles Kooperberg, SiGN 
 
 ## Abstract
 
-Large genome-wide association studies (GWAS) employing case-control study designs have now identified tens of loci associated with ischemic stroke (IS). As a complement to these studies, we performed GWAS in a case-only design to identify loci influencing age at onset (AAO) of ischemic stroke. Analyses were conducted in a Discovery cohort of 10,857 ischemic stroke cases under a linear regression framework. We meta-analyzed all SNPs with p-value < 1x10<sup>-5</sup> in a sex-combined or sex-stratified analysis using summary data from two additional Replication cohorts (11,539)).  In the women-only meta-analysis, we detected significant evidence for association of AAO with rs429358 - an exonic variant in _APOE_ that encodes for the APOE-Є4 allele.  Each copy of the rs429358:T>C allele was associated with a 1.63 years earlier stroke AOO (meta p-value = 2.4x10<sup>-8</sup>). 
+Large genome-wide association studies (GWAS) employing case-control study designs have now identified tens of loci associated with ischemic stroke (IS). As a complement to these studies, we performed GWAS in a case-only design to identify loci influencing age at onset (AAO) of ischemic stroke. Analyses were conducted in a Discovery cohort of 10,857 ischemic stroke cases under a linear regression framework. We meta-analyzed all SNPs with p-value < 1x10<sup>-5</sup> in a sex-combined or sex-stratified analysis using summary data from two additional Replication cohorts (11,539)).  In the women-only meta-analysis, we detected significant evidence for association of AAO with rs429358 - an exonic variant in _APOE_ that encodes for the APOE-Є4 allele.  Each copy of the rs429358:T>C allele was associated with a 1.29 years earlier stroke AOO (meta p-value = 2.48x10<sup>-11</sup>). 
 
-This _APOE_ variant has previously been associated with increased mortality, but not with ischemic stroke AAO. We therefore hypothesized that the association with AAO may reflect a survival bias attributable to an age-related decline in mortality among APOE-Є4 carriers and having no association to stroke AAO per se.  Using a simulation study, we found that a variant associated with overall mortality might indeed be detected with an AAO analysis. A variant with a twofold increase on mortality risk would lead to an observed effect of AAO that is comparable to what we found. We conclude that the _APOE_-age of stroke onset association may reflect a general association of _APOE_ with mortality, especially pronounced in women, or alternatively, may reflect a female-specific effect on ischemic stroke AAO.
+This _APOE_ variant has previously been associated with increased mortality, but not with ischemic stroke AAO. We therefore hypothesized that the association with AAO may reflect a survival bias attributable to an age-related decline in mortality among APOE-Є4 carriers and having no association to stroke AAO per se.  Using a simulation study, we found that a variant associated with overall mortality might indeed be detected with an AAO analysis. A variant with a two-fold increase on mortality risk would lead to an observed effect of AAO that is comparable to what we found. In conclusion, we detected a robust association of the APOE locus with stroke AAO and provided simulations to suggest that this association may be unrelated to ischemic stroke per se but related to a general survival bias.  
 
 
 ## Where do I start?
@@ -19,20 +19,40 @@ You can load this project in RStudio by opening the file called 'AAO_IschemicStr
 ## Project structure
 
 <!--  You can add rows to this table, using "|" to separate columns.         -->
-File                         | Description                | Usage         
----------------------------- | -------------------------- | --------------
-README.md                    | Description of project     | Human editable
-AAO_IschemicStroke.git.Rproj | Project file               | Loads project 
-LICENSE                      | User permissions           | Read only     
-.worcs                       | WORCS metadata YAML        | Read only     
-prepare_data.R               | Script to process raw data | Human editable
-renv.lock                    | Reproducible R environment | Read only     
+File                         | Description                          | Usage         
+---------------------------- | ------------------------------------ | --------------
+README.md                    | Description of project               | Human editable
+LICENSE                      | User permissions                     | Read only     
+AAO_IschemicStroke.git.Rproj | Project file                         | Loads project 
+.worcs                       | WORCS metadata YAML                  | Read only     
+renv.lock                    | Reproducible R environment           | Read only     
+1. Parsing_GWASSumStats.Rmd  | Notebook to plot GWAS data           | Human editable
+2. AssociationPlots.Rmd      | Notebook to create regional plots    | Human editable
+3. SimulationPlot.Rmd        | Notebook for the simulation analysis | Human editable
+4. forest.poster.sign.Rmd    | Notebook to generate the forest plot | Human editable
+AAO                          | Results and plots                    | Human editable
+images                       | Project images                       | Human editable
+meta                         | Results from the meta-GWAS           | Human editable
+scripts                      | Scripts to process data              | Human editable
+simulation_data              | Simulation data                      | Human editable
+scripts                      | Simulation plot                      | Human editable
+targets                      | Targets from this study              | Human editable
 
 <!--  You can consider adding the following to this file:                    -->
 <!--  * A citation reference for your project                                -->
 <!--  * Contact information for questions/comments                           -->
 <!--  * How people can offer to contribute to the project                    -->
 <!--  * A contributor code of conduct, https://www.contributor-covenant.org/ -->
+
+## Data
+
+All the input data and individual cohort GWAS summary statistics are available 
+through our collaborators (FinnGen and WHI), and for SiGN through dbGaP: [link here]
+
+The summary statistics from the meta-analysis in SiGN are available through 
+dataverseNL [link here] and GWAS Catalog [link here].
+
+The lookups in the MEGASTROKE data, FinnGen, and WHI are in the `meta`-folder. 
 
 # Reproducibility
 
@@ -74,13 +94,14 @@ The framework was based on the [`WORCS` package](https://osf.io/zcvbs/).
 
 #### Changes log
 
-    Version:      v1.0.0
-    Last update:  2022-04-12
+    Version:      v1.0.1
+    Last update:  2022-12-08
     Written by:   Sander W. van der Laan (s.w.vanderlaan-2[at]umcutrecht.nl).
     Description:  Script to get some figures for AAO.
     Minimum requirements: R version 3.4.3 (2017-06-30) -- 'Single Candle', Mac OS X El Capitan
     
     Changes log
+    * v1.0.1 Additional clarifications on data availability. Updates to plots. Updates to available results.
     * v1.0.0 Initial version. 
     
     
