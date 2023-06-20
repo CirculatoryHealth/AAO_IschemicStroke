@@ -32,13 +32,11 @@ renv.lock                    | Reproducible R environment              | Read on
 4. forest.poster.sign.Rmd    | Notebook to generate the forest plot    | Human editable
 _AAO_archived                | Some scribble-scripts                   | Human editable
 AAO                          | Results and plots                       | Human editable
-finemap                      | Results from finemapping; not used;     |
-                             | available offline                       | Human editable
+finemap                      | Results from finemapping; not used; available offline | Human editable
 images                       | Project images                          | Human editable
 meta                         | Results from the meta-GWAS              | Human editable
 meta_discovery               | Discovery results                       | Human editable
-meta_other_stuff             | Results from meta-analysis;             |
-                             | raw input; not used; available offline  | Human editable
+meta_other_stuff             | Results from meta-analysis; raw input; not used; available offline  | Human editable
 simulation_data              | Simulation data                         | Human editable
 scripts                      | Simulation plot                         | Human editable
 targets                      | Targets from this study                 | Human editable
@@ -86,8 +84,7 @@ This work was supported by NIH grants R01 NS100178 and R01 NS105150 from the U.S
 
 We are thankful for the support of the Netherlands CardioVascular Research Initiative of the Netherlands Heart Foundation (CVON 2011/B019 and CVON 2017-20: Generating the best evidence-based pharmaceutical targets for atherosclerosis [GENIUS I&II]), the ERA-CVD program ‘druggable-MI-targets’ (grant number: 01KL1802), and the Leducq Fondation ‘PlaqOmics’.
 
-The Women’s Health Initiatives (WHI) program was funded by the National Heart, Lung, and Blood Institute, NIH, US Department of Health and Human Services through contracts N01WH22110, 24152, 32100-2, 32105-6, 32108-9, 32111-13, 32115, 32118 to 32119, 32122, 42107-26, 42129-32, and 44221.  
-
+The Women’s Health Initiatives (WHI) program was funded by the National Heart, Lung, and Blood Institute, National Institutes of Health, U.S. Department of Health and Human Services through contracts 75N92021D00001, 75N92021D00002, 75N92021D00003, 75N92021D00004, and 75N92021D00005.
 
 The framework was based on the [`WORCS` package](https://osf.io/zcvbs/).
 
@@ -99,13 +96,14 @@ The framework was based on the [`WORCS` package](https://osf.io/zcvbs/).
 
 #### Changes log
 
-    Version:      v1.0.1
-    Last update:  2022-12-08
+    Version:      v1.0.2
+    Last update:  2023-06-21
     Written by:   Sander W. van der Laan (s.w.vanderlaan-2[at]umcutrecht.nl).
     Description:  Script to get some figures for AAO.
     Minimum requirements: R version 3.4.3 (2017-06-30) -- 'Single Candle', Mac OS X El Capitan
     
     Changes log
+    * v1.0.2 Textual fixes. Changes to the funding.
     * v1.0.1 Additional clarifications on data availability. Updates to plots. Updates to available results.
     * v1.0.0 Initial version. 
     
@@ -113,12 +111,12 @@ The framework was based on the [`WORCS` package](https://osf.io/zcvbs/).
 --------------
 
 #### The MIT License (MIT)
-##### Copyright (c) 1979-2022 Sander W. van der Laan | s.w.vanderlaan [at] gmail [dot] com.
+##### Copyright (c) 1979-2023 Sander W. van der Laan | s.w.vanderlaan [at] gmail [dot] com.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:   
+<sup>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</sup>
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+<sup>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</sup>
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+<sup>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</sup>
 
-Reference: http://opensource.org.
+<sup>Reference: http://opensource.org.</sup>
