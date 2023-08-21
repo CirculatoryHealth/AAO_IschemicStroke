@@ -115,7 +115,7 @@ simdataAAO <- simdataAAO %>%
                            "Additive Effect on Stroke" = "Additive genetic effect", 
                            "Multiplicative SNP Effect on Stroke" = "Multiplicative genetic effect", 
                            "SNP Effect on Death" = "Genetic effect on death"))
-simdataAAO$Design <- "age-at-onset"
+simdataAAO$Design <- "age at onset"
 
 simdataStrokeCC <- simdataStrokeCC %>%
     mutate(study = recode(study, 
