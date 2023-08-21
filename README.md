@@ -97,12 +97,13 @@ The framework was based on the [`WORCS` package](https://osf.io/zcvbs/).
 #### Changes log
 
     Version:      v1.0.2
-    Last update:  2023-06-21
+    Last update:  2023-0-21
     Written by:   Sander W. van der Laan (s.w.vanderlaan-2[at]umcutrecht.nl).
     Description:  Script to get some figures for AAO.
     Minimum requirements: R version 3.4.3 (2017-06-30) -- 'Single Candle', Mac OS X El Capitan
     
     Changes log
+    * v1.0.3 Fixed genetic effects and power figure for clarity.
     * v1.0.2 Textual fixes. Changes to the funding.
     * v1.0.1 Additional clarifications on data availability. Updates to plots. Updates to available results.
     * v1.0.0 Initial version. 
